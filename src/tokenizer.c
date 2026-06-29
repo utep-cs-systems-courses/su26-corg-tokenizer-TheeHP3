@@ -76,3 +76,66 @@ char *copy_str(char *inStr, short len)
 
     return copy;
 }
+
+char **tokenize(char *s)
+{
+    int num_tokens = count_tokens(s);
+
+    // +1 for NULL sentinel at end
+    char **tokens = malloc(sizeof(char *) * (num_tokens + 1));
+
+    if (tokens == NULL)
+        return NULL;
+
+    int i = 0;
+
+    char *current = token_start(s);
+
+    while (current != NULL && i < num_tokens)
+    {
+        char *end = token_terminator(current);
+        int len = end - current;
+
+        tokens[i] = copy_str(current, len);
+
+        i++;
+
+        current = token_start(end);
+    }
+
+    tokens[i] = NULL; // important sentinel
+
+    return tokens;
+}
+
+/*
+ * print_tokens:
+ * Prints each token line by line
+ */
+void print_tokens(char **tokens)
+{
+    int i = 0;
+
+    while (tokens[i] != NULL)
+    {
+        printf("%s\n", tokens[i]);
+        i++;
+    }
+}
+
+/*
+ * free_tokens:
+ * Frees each token string and then the array itself
+ */
+void free_tokens(char **tokens)
+{
+    int i = 0;
+
+    while (tokens[i] != NULL)
+    {
+        free(tokens[i]);
+        i++;
+    }
+
+    free(tokens);
+}

@@ -20,5 +20,11 @@ int main()
 
         printf("count_tokens = %d\n", count_tokens(str));
 
+    	char input[] = "this is a test";
+    	char **tokens = tokenize(input);
+
+    	print_tokens(tokens);
+    	free_tokens(tokens);
+
     return 0;
 }
