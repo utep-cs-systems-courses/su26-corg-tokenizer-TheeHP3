@@ -1,18 +1,24 @@
 #include <stdio.h>
+#include <tokenizer.h>
 
 int main()
 {
-    char input[100];
+    char str[] = "  hello   world  test ";
 
-    while (1) {
-        printf("> ");
-        fflush(stdout);
+    printf("Tokens: %d\n", count_tokens(str));
 
-        if (fgets(input, sizeof(input), stdin) == NULL)
-            break;
+    char *start = token_start(str);
 
-        printf("%s", input);
-    }
+    if (start)
+        printf("First token begins with: %c\n", *start);
+
+        printf("space_char(' ') = %d\n", space_char(' '));
+        printf("space_char('a') = %d\n", space_char('a'));
+
+        printf("non_space_char('a') = %d\n", non_space_char('a'));
+        printf("non_space_char(' ') = %d\n", non_space_char(' '));
+
+        printf("count_tokens = %d\n", count_tokens(str));
 
     return 0;
 }
